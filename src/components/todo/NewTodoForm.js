@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-export class AddTodo extends Component {
+export class NewTodoForm extends Component {
     state = {
         title: ''
     }
@@ -19,7 +19,6 @@ export class AddTodo extends Component {
     }
 
     render() {
-        console.log(this.state)
         return (
             <form onSubmit={this.onSubmit} style={{ display: 'flex' }}>
                 <input
@@ -41,4 +40,4 @@ export class AddTodo extends Component {
     }
 }
 
-export default AddTodo
+export default NewTodoForm
