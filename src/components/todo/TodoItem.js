@@ -11,8 +11,6 @@ export class TodoItem extends Component {
         }
     }
 
-
-
     render() {
         const {title, id} = this.props.todo;
         return (
