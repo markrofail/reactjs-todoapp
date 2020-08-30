@@ -1,27 +1,17 @@
 import React, { Component } from 'react'
 import TodoList from './TodoList'
 import NewTodoForm from './NewTodoForm'
-import { v4 as uuid } from 'uuid'
+import axios from 'axios'
 
 export class TodoApp extends Component {
     state = {
-        'todos': [
-            {
-                "id": uuid(),
-                "title": "delectus aut autem",
-                "completed": false
-            },
-            {
-                "id": uuid(),
-                "title": "quis ut nam facilis et officia qui",
-                "completed": false
-            },
-            {
-                "id": uuid(),
-                "title": "fugiat veniam minus",
-                "completed": true
-            },
-        ]
+        'todos': []
+    }
+
+    // LifeCycle method: onStart
+    componentDidMount() {
+        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+            .then(res => this.setState({ todos: res.data }))
     }
 
     // Toggle Compelete
@@ -38,21 +28,33 @@ export class TodoApp extends Component {
 
     // Delete Todo
     deleteTodo = (id) => {
-        this.setState({
-            todos: [...this.state.todos.filter(todo => (todo.id !== id))]
-        })
+        // update Backend
+        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+            .then(res => {
+                // update UI
+                this.setState({
+                    todos: [...this.state.todos.filter(todo => (todo.id !== id))]
+                })
+            }
+        )
     }
 
     // Add Todo
     createTodo = (title) => {
         const newTodo = {
-            "id": uuid(),
             title,
             completed: false
         }
-        this.setState({
-            todos: [...this.state.todos, newTodo]
-        })
+
+        // update Backend
+        axios.post('https://jsonplaceholder.typicode.com/todos', newTodo)
+            .then(res =>
+                // update UI
+                this.setState({
+                    todos: [...this.state.todos, res.data]
+                }
+            )
+        )
     }
 
 
