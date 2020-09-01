@@ -1,26 +1,35 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
+import { Checkbox, Flex, Text, IconButton } from "@chakra-ui/core"
+import { DeleteIcon} from '@chakra-ui/icons'
 
 export class TodoItem extends Component {
-    getStyle = () => {
-        return {
-            backgroundColor: '#f4f4f4',
-            padding: '10px',
-            borderBottom: '1px #ccc dotted',
-            textDecoration: this.props.todo.completed ? 'line-through' : 'none'
-        }
-    }
-
     render() {
-        const {title, id} = this.props.todo;
+        const { id, title, completed } = this.props.todo;
         return (
-            <div style={this.getStyle()}>
-                <p>
-                    <input type="checkbox" onChange={this.props.toggleComplete.bind(this, id)}/>
-                    {title}
-                    <button style= {btnStyle} onClick={this.props.deleteTodo.bind(this, id)}>x</button>
-                </p>
-            </div>
+            <Flex alignItems="baseline" shadow="md" padding="1em">
+                <Checkbox
+                    size="md"
+                    flex="1"
+                    verticalAlign='middle'
+                    colorScheme="blue"
+                    defaultIsChecked={completed}
+                    onChange={this.props.toggleComplete.bind(this, id)}
+                />
+                <Text
+                    flex="20"
+                    mt={4}
+                    as={completed ? "s" : ""}
+                >{title}</Text>
+                <IconButton
+                    size="sm"
+                    flex="1"
+                    colorScheme="red"
+                    variant="link"
+                    onClick={this.props.deleteTodo.bind(this, id)}
+                    icon={ <DeleteIcon/> }
+                />
+            </Flex>
         )
     }
 }
@@ -31,16 +40,5 @@ TodoItem.propTypes = {
     toggleComplete: PropTypes.func.isRequired,
     deleteTodo: PropTypes.func.isRequired
 }
-
-const btnStyle = {
-    background: '#ff0000',
-    color: '#fff',
-    border: 'none',
-    padding: '5px 8px',
-    borderRadius: '100%',
-    cursor: 'pointer',
-    float: 'right'
-}
-
 
 export default TodoItem
