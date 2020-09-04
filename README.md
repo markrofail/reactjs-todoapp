@@ -1,9 +1,6 @@
 <!-- PROJECT LOGO -->
-<br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="public/logo.png" alt="Logo" width="80" height="80">
-  </a>
+    <img src="assets/logo.png" alt="Logo" width="80" height="80">
 
   <h3 align="center">TodoApp</h3>
 
@@ -21,10 +18,7 @@
   </p>
 </p>
 
-
-
-<!-- TABLE OF CONTENTS -->
-## Table of Contents
+**Table of Contents**
 
 * [About the Project](#about-the-project)
   * [Built With](#built-with)
@@ -42,8 +36,7 @@
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
-
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+![gif preview](assets/preview.gif)
 
 There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need.
 
@@ -57,10 +50,8 @@ Of course, no one template will serve all projects since your needs may be diffe
 A list of commonly used resources that I find helpful are listed in the acknowledgements.
 
 ### Built With
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-* [Bootstrap](https://getbootstrap.com)
-* [JQuery](https://jquery.com)
-* [Laravel](https://laravel.com)
+* [ReactJs](https://reactjs.org/)
+* [ChakraUI](https://chakra-ui.com/)
 
 
 
