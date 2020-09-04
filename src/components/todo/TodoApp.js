@@ -1,48 +1,21 @@
-import React, { Component } from 'react'
+import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 
 import TodoList from './TodoList'
 import TodoForm from './TodoForm'
 import './TodoApp.css';
 
-export class TodoApp extends Component {
-    state = {
-        'todos': []
-    }
+function TodoApp() {
+    const [todos, setTodos] = useState([]);
 
     // LifeCycle method: onStart
-    componentDidMount() {
+    useEffect(() => {
         axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
-            .then(res => this.setState({ todos: res.data }))
-    }
-
-    // Toggle Compelete
-    toggleComplete = (id) => {
-        this.setState({
-            todos: this.state.todos.map(todo => {
-                if (todo.id === id) {
-                    todo.completed = !todo.completed
-                }
-                return todo;
-            })
-        })
-    }
-
-    // Delete Todo
-    deleteTodo = (id) => {
-        // update Backend
-        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-            .then(res => {
-                // update UI
-                this.setState({
-                    todos: [...this.state.todos.filter(todo => (todo.id !== id))]
-                })
-            }
-        )
-    }
+            .then(res => setTodos(res.data))
+    }, [])
 
     // Add Todo
-    createTodo = (title) => {
+    const createTodo = title => {
         const newTodo = {
             title,
             completed: false
@@ -52,28 +25,50 @@ export class TodoApp extends Component {
         axios.post('https://jsonplaceholder.typicode.com/todos', newTodo)
             .then(res =>
                 // update UI
-                this.setState({
-                    todos: [...this.state.todos, res.data]
-                }
+                setTodos([...todos, res.data])
             )
-        )
     }
 
+    // Toggle Compelete
+    const toggleComplete = (id, index) => {
+        // update local state
+        const newTodos = [...todos];
+        newTodos[index].completed = !newTodos[index].completed;
 
-    render() {
-        return (
-            <>
-                <TodoForm
-                    createTodo={this.createTodo}
-                />
-                <TodoList
-                    todos={this.state.todos}
-                    toggleComplete={this.toggleComplete}
-                    deleteTodo={this.deleteTodo}
-                />
-            </>
-        )
+        axios.put(`https://jsonplaceholder.typicode.com/todos/${id}`, newTodos[index])
+            .then(_ => {
+                // update UI
+                setTodos(newTodos);
+            })
     }
+
+    // Delete Todo
+    const deleteTodo = (id, index) => {
+        // update local state
+        const newTodos = [...todos];
+        newTodos.splice(index, 1);
+
+        // update Backend
+        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+            .then(_ => {
+                // update UI
+                setTodos(newTodos);
+            })
+    }
+
+    return (
+        <>
+            <TodoForm
+                createTodo={createTodo}
+            />
+
+            <TodoList
+                todos={todos}
+                deleteTodo={deleteTodo}
+                toggleComplete={toggleComplete}
+            />
+        </>
+    )
 }
 
 export default TodoApp

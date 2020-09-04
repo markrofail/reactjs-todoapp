@@ -1,50 +1,38 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types';
-
-import { IconButton, Input, Box, Flex} from "@chakra-ui/core"
+import React, { useState } from 'react'
+import { IconButton, Input, Box, Flex } from "@chakra-ui/core"
 import { AddIcon } from '@chakra-ui/icons'
 
-export class TodoForm extends Component {
-    state = {
-        title: ''
-    }
+function TodoForm({ createTodo }) {
+    const [title, setTitle] = useState("");
 
-    onChange = (e) => this.setState({
-        [e.target.name]: e.target.value
-    });
+    const handleSubmit = e => {
+        if (!title) return;
 
-    onSubmit = (e) => {
         // create new todo objects
-        this.props.createTodo(this.state.title);
+        createTodo(title);
 
         // clear input
-        this.setState({ title: '' });
+        setTitle('');
     }
 
-    render() {
-        return (
-            <Flex as="form" className="todo-form-container">
-                <Box className="todo-form">
-                    <Input className="todo-form-input"
-                        width= "60%"
-                        name="title"
-                        type="text"
-                        placeholder="Add Todo ..."
-                        value={this.state.title}
-                        onChange={this.onChange} />
-                    <IconButton className="todo-form-submit"
-                        variant="link"
-                        onClick={this.onSubmit}
-                        icon={< AddIcon />} />
-                </Box>
-            </Flex>
-        )
-    }
+    return (
+        <Flex as="form" className="todo-form-container">
+            <Box className="todo-form">
+                <Input className="todo-form-input"
+                    width="60%"
+                    name="title"
+                    type="text"
+                    placeholder="Add Todo ..."
+                    value={title}
+                    onChange={e => setTitle(e.target.value)}
+                />
+                <IconButton className="todo-form-submit"
+                    variant="link"
+                    onClick={handleSubmit}
+                    icon={< AddIcon />} />
+            </Box>
+        </Flex>
+    )
 }
 
-// PropTypes
-TodoForm.propTypes = {
-    createTodo: PropTypes.func.isRequired
-}
-
-export default TodoForm;
+export default TodoForm
