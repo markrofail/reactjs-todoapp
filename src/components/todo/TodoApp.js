@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import TodoList from './TodoList'
-import NewTodoForm from './NewTodoForm'
 import axios from 'axios'
+
+import TodoList from './TodoList'
+import TodoForm from './TodoForm'
+import './TodoApp.css';
 
 export class TodoApp extends Component {
     state = {
@@ -60,8 +62,8 @@ export class TodoApp extends Component {
 
     render() {
         return (
-            <React.Fragment>
-                <NewTodoForm
+            <>
+                <TodoForm
                     createTodo={this.createTodo}
                 />
                 <TodoList
@@ -69,7 +71,7 @@ export class TodoApp extends Component {
                     toggleComplete={this.toggleComplete}
                     deleteTodo={this.deleteTodo}
                 />
-            </React.Fragment>
+            </>
         )
     }
 }

@@ -1,34 +1,28 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types';
 import { Checkbox, Flex, Text, IconButton } from "@chakra-ui/core"
-import { DeleteIcon} from '@chakra-ui/icons'
+import { DeleteIcon } from '@chakra-ui/icons'
 
 export class TodoItem extends Component {
     render() {
         const { id, title, completed } = this.props.todo;
         return (
-            <Flex alignItems="baseline" shadow="md" padding="1em">
-                <Checkbox
-                    size="md"
-                    flex="1"
-                    verticalAlign='middle'
+            <Flex className="todo-item-containter">
+                <Checkbox className="todo-item-checkbox"
                     colorScheme="blue"
                     defaultIsChecked={completed}
-                    onChange={this.props.toggleComplete.bind(this, id)}
-                />
-                <Text
-                    flex="20"
-                    mt={4}
+                    onChange={this.props.toggleComplete.bind(this, id)} />
+                <Text className="todo-item-text"
                     as={completed ? "s" : ""}
-                >{title}</Text>
-                <IconButton
-                    size="sm"
-                    flex="1"
+                    textColor={completed ? "grey" : "black"}>
+                    {title}
+                </Text>
+                <IconButton className="todo-item-delete"
                     colorScheme="red"
+                    size="sm"
                     variant="link"
                     onClick={this.props.deleteTodo.bind(this, id)}
-                    icon={ <DeleteIcon/> }
-                />
+                    icon={<DeleteIcon />} />
             </Flex>
         )
     }
