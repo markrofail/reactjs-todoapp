@@ -5,12 +5,14 @@ import TodoList from './TodoList'
 import TodoForm from './TodoForm'
 import './TodoApp.css';
 
+const baseUrl = 'http://localhost:3001';
+
 function TodoApp() {
     const [todos, setTodos] = useState([]);
 
     // LifeCycle method: onStart
     useEffect(() => {
-        axios.get('https://jsonplaceholder.typicode.com/todos?_limit=10')
+        axios.get(`${baseUrl}/todos?_limit=10`)
             .then(res => setTodos(res.data))
     }, [])
 
@@ -22,7 +24,7 @@ function TodoApp() {
         }
 
         // update Backend
-        axios.post('https://jsonplaceholder.typicode.com/todos', newTodo)
+        axios.post(`${baseUrl}/todos`, newTodo)
             .then(res =>
                 // update UI
                 setTodos([...todos, res.data])
@@ -35,7 +37,7 @@ function TodoApp() {
         const newTodos = [...todos];
         newTodos[index].completed = !newTodos[index].completed;
 
-        axios.put(`https://jsonplaceholder.typicode.com/todos/${id}`, newTodos[index])
+        axios.put(`${baseUrl}/todos/${id}`, newTodos[index])
             .then(_ => {
                 // update UI
                 setTodos(newTodos);
@@ -49,7 +51,7 @@ function TodoApp() {
         newTodos.splice(index, 1);
 
         // update Backend
-        axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
+        axios.delete(`${baseUrl}/todos/${id}`)
             .then(_ => {
                 // update UI
                 setTodos(newTodos);

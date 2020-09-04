@@ -1,0 +1,14 @@
+# pull official base image
+FROM node:14.9.0-alpine
+
+# set working directory
+WORKDIR /app
+
+# install app dependencies
+RUN npm install -g json-server 
+
+# add database template
+COPY db.json /app
+
+# start server
+CMD [ "node", "/usr/local/bin/json-server", "--watch", "db.json", "--host", "0.0.0.0", "--port", "3001"]

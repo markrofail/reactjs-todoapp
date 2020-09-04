@@ -1,0 +1,29 @@
+{
+  "todos": [
+    {
+      "id": 1,
+      "title": "Buy Groceries",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "title": "Standup Meeting @ 10am",
+      "completed": false
+    },
+    {
+      "id": 3,
+      "title": "Take out the Trash",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "title": "Learn ReactJS",
+      "completed": true
+    },
+    {
+      "id": 5,
+      "title": "Call Family",
+      "completed": false
+    }
+  ]
+}

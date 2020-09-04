@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+    reactjs:
+        container_name: reactjs
+        build:
+            context: .
+            dockerfile: compose/Dockerfile
+        volumes:
+            - '/app/node_modules'
+            - './:/app'
+        ports:
+            - 3000:3000
+        # workaround for webpack 
+        stdin_open: true
+        tty: true
+    
+    backend:
+        container_name: backend
+        build:
+            context: .
+            dockerfile: compose/Dockerfile.backend
+        volumes:
+            - '/app/node_modules'
+            - './:/app'
+        ports:
+            - 3001:3001
