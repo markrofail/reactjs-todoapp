@@ -1,6 +1,6 @@
 <!-- PROJECT LOGO -->
 <p align="center">
-    <img src="assets/logo.png" alt="Logo" width="80" height="80">
+    <img src="docs/images/logo.png" alt="Logo" width="80" height="80">
   <h3 align="center">TodoApp</h3>
   <p align="center">
     a Todo List app built with ReactJS
@@ -10,30 +10,31 @@
 **Table of Contents**
 
 - [About The Project](#about-the-project)
-  - [Built With](#built-with)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
 - [Usage](#usage)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
 - [Acknowledgements](#acknowledgements)
-
 
 ## About The Project
 
-A simple Todo List application with basic features
+  <img src="docs/preview.gif" alt="gif preview" width="80%">
+
+Features:
+
+- Built using [ReactJs](https://reactjs.org/) <img src="docs/images/reactjs.svg" alt="reactjs logo" height="15">
+- Interaction with backend using [Axios](https://github.com/axios/axios)
+- Mocked backend server using [json-server](https://github.com/typicode/json-server) <img src="docs/images/json-server.ico" alt="json-server logo" height="15">
+- [ChakraUI](https://chakra-ui.com/) as the components library <img src="docs/images/chakra.png" alt="chakra logo" height="15">
+- Fully dockerized <img src="docs/images/docker.png" alt="docker logo" height="15">
+
+Functionality:
 
 - add a new Todo
 - mark a Todo as complete
 - delete a Todo
 
-![gif preview](assets/preview.gif)
 
-### Built With
-
-- [ReactJs](https://reactjs.org/)
-- [json-server](https://github.com/typicode/json-server)
-- [ChakraUI](https://chakra-ui.com/)
-
-## Getting Started
+## Usage
 
 ### Prerequisites
 
@@ -42,15 +43,14 @@ A simple Todo List application with basic features
 
 Follow [this guide](https://docs.docker.com/compose/install/) to learn how to install them
 
-## Usage
+### Installation
 
 - just use the following command to get the application to start
 
 ```sh
-make
-```
+ docker-compose -f docker-compose.local.yml up --build
+ ```
 
-<!-- ACKNOWLEDGEMENTS -->
 ## Acknowledgements
 
 - Logo made by [Freepik]("https://www.flaticon.com/authors/freepik")
